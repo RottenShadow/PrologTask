@@ -1,9 +1,11 @@
 predicates
 	play(integer,symbol)
 	win(symbol,symbol)
+	rand(integer)
+
 clauses
 	play(X,Played):- 
-	X=1, Played = "Rock";
+	X=1,Played="Rock";
 	X=2,Played="Paper";
 	X=3,Played="Scissors".
 	
@@ -14,6 +16,8 @@ clauses
 	X="Paper",Y="Rock",write("You Won");
 	write("You Lost").
 	
+	rand(Z):- random(X),  Z=2*X+1.
+
 goal
 
 	nl,write("Choose an option"),nl,
@@ -22,7 +26,7 @@ goal
 	write("3 : Scissors"),nl,
 	readint(X),play(X,PlayedPC),
 	nl,write("You played : ",PlayedPC),nl,
-	random(Y),Z = 2 * Y + 1 ,
+	rand(Z),
 	play(Z,PlayedNPC),
 	write("Computer played : ",PlayedNPC),nl,
 	nl,win(PlayedPC,PlayedNPC).
